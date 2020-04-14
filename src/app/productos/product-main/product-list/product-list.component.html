@@ -1,0 +1,58 @@
+<p *ngIf ="flag == true">Modo product-list</p>
+<p *ngIf ="flag == false">Modo monitoreados</p>
+
+<div class="row">
+
+    <div *ngIf ="flag == true" class="col-4">
+        <input type="text"
+        [(ngModel)] = "inputValue"
+         class="form-control" name="" id="" aria-describedby="helpId" placeholder="" >
+    </div> 
+    <div *ngIf ="flag == true" >
+        <a name="" id="" class="btn btn-primary" href="#" routerLink="/products" role="button">Buscar producto</a>
+    </div>
+
+    <div *ngIf ="flag == false" class="col-4">
+        <input type="text"
+        [(ngModel)] = "inputValue" 
+         class="form-control" name="" id="" aria-describedby="helpId" placeholder="" >
+    </div> 
+    <div *ngIf ="flag == false" >
+        <a name="" id="" class="btn btn-primary" href="#" routerLink="/monitoreo" role="button">Buscar producto</a>
+    </div>
+
+    <div *ngIf ="flag == true"  class="ml-2">
+        <button [disabled] = "!addingFlag"
+        class="btn btn-success"  href="#" routerLink="/products">Añadir seleccionados a monitoreados</button >
+    </div>
+
+</div>
+
+<div *ngIf = "productList.length > 0 && flag == true" class=" mt-2">
+    <ul>
+        <!--AQUÍ PONES EL COMPONENTE-->
+        <!--//Ng cfor, le pasas de parametro el index, aparte de los otros datos de los productos.
+        //Nombre, ID, desc, precio || index (ngfor)-->
+        <li *ngFor = "let l of productList; let i = index" class="border list-unstyled">
+            <app-product [product] = "l" [position]=i [productosMode] = "true"
+            (positionToEliminate)="borrar($event)"
+            ></app-product>
+        </li>
+
+    </ul>
+</div>
+
+<div *ngIf = "prList.length > 0 && flag == false" class=" mt-2">
+    <ul>
+        <li *ngFor = "let item of prList; let i = index" class="border list-unstyled">
+            <app-product [product] = "item" [position]=i [productosMode]="flag"
+            (positionToEliminate)="borrar($event)"
+            ></app-product>
+        </li>
+    </ul>
+</div>
+
+<div *ngIf = "productList.length == 0 && flag == true" class="alert alert-danger" role="alert"   >
+    <strong>Ningún producto concuerda con la búsqueda</strong>
+</div>
+

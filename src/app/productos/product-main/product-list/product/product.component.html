@@ -1,0 +1,37 @@
+
+    <div class="row">
+        <div *ngIf = "productosMode==true" class="col-1">
+        <input type="checkbox" type="checkbox"
+        (input)="checkBoxValue=$event.target.checked" >
+        </div>
+
+        <div class="media col">
+        <img class="mr-3" src="https://picsum.photos/id/{{product.uid}}/100/100 " alt="Generic placeholder image">
+        <div class="media-body">
+            <h5 class="mt-0 mb-1"></h5>
+            <p><strong>{{product.nombre}}</strong></p>
+            <p>Precio (MXN):{{product.precio}} $</p>
+            <p>marca:{{product.marca}}  </p>
+            <p>Descripción: {{product.descripcion}} </p>
+            <p>Existencia:{{product.existencia}} </p>
+        </div>
+        <div class="media-right col-2 mt-3">
+            <div class="row">
+            <a name="" id="" class="btn btn-primary" href="#" routerLink="./{{product.uid}}/edit" role="button"><i class="fas fa-edit    "></i></a>
+            </div>
+            <div class="row mt-3">
+            <a name="" id="" class="btn btn-primary" href="#" routerLink="./{{product.uid}}" role="button" 
+            ><i class="fas fa-search    "></i></a>
+            </div>
+            <div *ngIf = "productosMode==true" class="row mt-3">
+            <a name="" id="" class="btn btn-danger" href="#" role="button" routerLink="./" (click)="delete()"> 
+            <i class="fas fa-trash"></i></a>
+            </div>
+            <div *ngIf = "productosMode==false" class="row mt-3">
+                <a name="" id="" class="btn btn-danger" href="#" role="button" routerLink="./" (click)="delete()"> 
+                <i class="fas fa-trash"></i></a>
+                </div>
+
+        </div>
+        </div>
+    </div>

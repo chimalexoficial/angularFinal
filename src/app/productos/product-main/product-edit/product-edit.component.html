@@ -1,0 +1,95 @@
+<p>product-edit works!</p>
+<p *ngIf="agregando == true">Modo Agregar nuevo producto</p>
+<p *ngIf="agregando == false">Modo Editar producto</p>
+<form #f="ngForm" (ngSubmit)="submit(f)">
+  <div class="media">
+    <a class="d-flex align-self-bottom" href="#">
+      <img class="mr-3" *ngIf="product.uid > 0" src="https://picsum.photos/id/{{product.uid}}/100/100"
+        alt="Generic placeholder image">
+    </a>
+    <div class="media-body">
+      <div class="form-group">
+        <label for="">uid (clave de producto)</label>
+        <input *ngIf="agregando == true" [(ngModel)]="product.uid" ngModel name="uid" type="number"
+          class="form-control" min="0" name="uid" required>
+      </div>
+      <div class="form-group">
+        <label for="">Nombre de producto</label>
+        <input [(ngModel)]="product.nombre" ngModel name="nombre" type="text" class="form-control" name="nombre"
+          required>
+      </div>
+      <div class="form-group">
+        <label for="">Marca</label>
+        <select ngModel [(ngModel)]="product.marca" class="form-control" name="marca">
+          <option *ngFor="let m of marcas">{{m}}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="">Precio</label>
+        <input [(ngModel)]="product.precio" name="precio" type="number" class="form-control" name="precio" required>
+      </div>
+      <div class="form-group">
+        <label for="">Breve descripción</label>
+        <input [(ngModel)]="product.descripcion" ngModel name="descripcion" type="text" class="form-control"
+          name="breveDesc" required>
+      </div>
+      <div class="form-group">
+        <label for="">Existencia</label>
+        <input [(ngModel)]="product.existencia" ngModel name="existencia" type="number" class="form-control"
+          name="existencia" required>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-2">
+      <label for="">Atributo</label>
+      <input [(ngModel)]="especificaciones.atributo" ngModel name="atributo" #v1 type="text" class="form-control">
+    </div>
+    <div class="col-2">
+      <label for="">Valor</label>
+      <input [(ngModel)]="especificaciones.valor" ngModel name="valor" #v2 type="text" class="form-control">
+    </div>
+    <div class="col-2">
+      <label for="">Unidad</label>
+      <input [(ngModel)]="especificaciones.unidad" ngModel name="unidad" #v3 type="text" class="form-control">
+    </div>
+    <div *ngIf="agregando == true">
+      <label for="" style="color:white">añadir</label>
+      <a name="" id="" class="form-control btn btn-success" href="#" role="button" routerLink="/products/new"
+        (click)="agregarEspecificacion()"> <i class="fas fa-plus-circle"></i></a>
+    </div>
+    <div *ngIf="agregando == false">
+      <label for="" style="color:white">añadir</label>
+      <a name="" id="" class="form-control btn btn-success" href="#" routerLink="/products/{{product.uid}}/edit"
+        role="button" (click)="agregarEspecificacion()"> <i class="fas fa-plus-circle    "></i></a>
+    </div>
+  </div>
+
+  <div>
+    <table class="table mt-3">
+      <thead>
+        <tr>
+          <th>Atributo</th>
+          <th>Valor</th>
+          <th>Unidad</th>
+          <th>Borrar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let e of product.especificacion; let i = index">
+          <td scope="row">{{e.atributo}}</td>
+          <td>{{e.valor}}</td>
+          <td>{{e.unidad}}</td>
+          <td><button routerLink="/products/{{product.uid}}/edit"
+              class="btn btn-primary"><i class="fas fa-trash"></i></button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <input type="submit" class="btn btn-primary" value="Guardar">
+  <button class="btn btn-secondary ml-3" routerLink="/products">Cancelar</button>
+
+</form>
+
+<p> Datos del perfil</p>

@@ -1,0 +1,30 @@
+<p>id: {{id}}</p>
+<div class="media col">
+  <img class="mr-3" src="https://picsum.photos/id/{{product.uid}}/100/100 " alt="Generic placeholder image">
+  <div class="media-body">
+    <h5 class="mt-0 mb-1"></h5>
+    <p><strong>{{product.nombre}}</strong></p>
+    <p>Precio (MXN):{{product.precio}} $</p>
+    <p>marca:{{product.marca}} </p>
+    <p>Descripción: {{product.descripcion}} </p>
+    <p>Existencia:{{product.existencia}} </p>
+  </div>
+</div>
+<div>
+  <table class="table mt-3">
+    <thead>
+      <tr>
+        <th>Atributo</th>
+        <th>Valor</th>
+        <th>Unidad</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let e of product.especificacion">
+        <td scope="row">{{e.atributo}}</td>
+        <td>{{e.valor}}</td>
+        <td>{{e.unidad}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
